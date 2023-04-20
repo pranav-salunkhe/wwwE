@@ -24,10 +24,15 @@ Task - II of IRIS Web Team Rec
   cd client
   npm i
   ```
-# How to run the project
 + Make an account on MongoDB Atlas
+
 + Create a database for the project and set password
-+ Get the ```connection string``` from Atlas's connect option
+
++ Add your IP address in the whitelist of Atlas by navigating to ```Network Access -> Edit -> Allow from anywhere```
+
+# How to run the project
+
++ Get the ```connection string``` from Atlas's connect option: ```Overview -> connect -> Drivers -> Select Node.js```
 + Paste the ```connection string``` in ```line 19``` of ```server/src/index.js```:
   ```
   mongoose.connect(
@@ -35,12 +40,11 @@ Task - II of IRIS Web Team Rec
   );
   ```
 + Create a ```.env``` file at the root directory of project and store your username and password as follows:<br>
-> .env
+  > .env
   ```
   USN=yourusername
   PSWD=yourpassword
   ```
-+ Add your IP address in the whitelist of Atlas by navigating to ```Network Access -> Edit -> Allow from anywhere```
 + Run the server:<br>
   ```
   cd server
