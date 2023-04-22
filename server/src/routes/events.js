@@ -36,18 +36,18 @@ router.put("/", async (req, res) => {
     }
 });
 
-router.get("/savedEvents/ids", async (req, res) =>{
+router.get("/savedEvents/ids/:userID", async (req, res) =>{
     try{
-        const user = await UserModel.findById(req.body.userID);
+        const user = await UserModel.findById(req.params.userID);
         res.json({savedEvents: user?.savedEvents});
     }catch (err){
         res.json(err);
     }
 });
 
-router.get("/savedEvents", async (req, res) =>{
+router.get("/savedEvents/:userID", async (req, res) =>{
     try{
-        const user = await UserModel.findById(req.body.userID);
+        const user = await UserModel.findById(req.params.userID);
         const savedEvents = await EventModel.find({
             _id: {$in: user.savedEvents},
         });
