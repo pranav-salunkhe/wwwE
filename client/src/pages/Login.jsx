@@ -4,8 +4,8 @@ import {useCookies} from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 function Login() {
     const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const [_, setCookies] = useCookies(["access_token"]);
 
     const navigate = useNavigate();
@@ -15,11 +15,12 @@ function Login() {
         try{
             const response = await axios.post("http://localhost:3131/auth/login", {
                 username,
+                email,
                 password,
             });
             setCookies("access_token", response.data.token);
             window.localStorage.setItem("userID", response.data.userID);
-            navigate("/user");
+            response.data.isConvenor ? navigate("/admin") : navigate("/user");
         }catch(err){
             console.error(err);
             alert("Invalid password or username");
@@ -46,6 +47,7 @@ function Login() {
           <div className="flex flex-col justify-center items-center px-10 py-8 h-full w-full border-[1px] rounded-md border-collapse border-white">
             <form onSubmit={onSubmit} className=" h-full flex flex-col justify-center items-center gap-10 w-full">
               <input value={username} onChange={(event) => setUsername(event.target.value)} className='h-10 w-[70%] rounded-md placeholder:text-center placeholder:text-xl placeholder:text-white placeholder:text-opacity-30 text-white text-center bg-transparent border-[1px]' type="text" placeholder="Username" />
+              <input value={email} onChange={(event) => setEmail(event.target.value)} className='h-10 w-[70%] rounded-md placeholder:text-center placeholder:text-xl placeholder:text-white placeholder:text-opacity-30 text-white text-center bg-transparent border-[1px]' type="email" placeholder="email" />
               <div className='flex flex-col justify-center w-full items-center'>
                 <input value={password} onChange={(event) => setPassword(event.target.value)} className='h-10 w-[70%] rounded-md placeholder:text-center placeholder:text-xl placeholder:text-white placeholder:text-opacity-30 text-white text-center bg-transparent border-[1px]' type="password" placeholder="Password" />
                 <button className='flex w-[70%] justify-end text-blue-500'>Forgot Password?</button>

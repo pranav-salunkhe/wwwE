@@ -7,13 +7,13 @@ const router = express.Router()
 
 
 router.post("/register", async (req, res) => {
-    const {username, password} = req.body;
+    const {username, email, password} = req.body;
     const user = await UserModel.findOne({username});
     if(user){
         res.json({message: "User exists! Please login"});
     }else{
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new UserModel({username, password: hashedPassword});
+        const newUser = new UserModel({username, email, password: hashedPassword});
         await newUser.save();
         res.json({message: "User registered successfully!"});
     }
@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-    const { username, password } = req.body;
+    const { username, email, password } = req.body;
   
     const user = await UserModel.findOne({ username });
   
@@ -37,7 +37,7 @@ router.post("/login", async (req, res) => {
         .json({ message: "Username or password is incorrect" });
     }
     const token = jwt.sign({ id: user._id }, "secret");
-    res.json({ token, userID: user._id });
+    res.json({ token, userID: user._id, isConvenor: user.isConvenor, });
   });
 
 
