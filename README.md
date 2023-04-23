@@ -53,16 +53,29 @@ Task - II of IRIS Web Team Rec
 + Run the client (frontend):<br>
   ```
   cd client
-  npm start
+  npm run dev
   ```
 
 # List of implemented features
-
+1. Authentication, Authorization:
+```
+- The users can access the features of the app only if they are logged in.
+- I've used username, email, password based login functionality. The user needs to create a unique username and use their NITK edu mail.
+- Admins/Convenors can create events.
+- Any student of NITK can see all the events, they don't need to be part of a club.
+```
+2. Authorization flow, Roles: 
+```
+- If the user is not a convenor, they can simply view the events and save them.
+- If a user is a convenor, along with above functionalities they are directed to '/admin' path which has the functionalities of creating events.
+```
 # List of non implemented/planned features
 
 # List of known bugs
+1. The `createEvent` form doesn't submit the post request for creating event, although the API for the same works completely well on Postman/Insomnia.
 
 # References
+1. Builder.io YT Tutorials
 
 # Screenshots
 
