@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
+
+// landing page i.e. screen which is displayed to unregistered/logged out users
 function Home() {
 
   return (

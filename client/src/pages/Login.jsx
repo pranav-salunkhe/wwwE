@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import {useCookies} from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+
+// page for registered users to log in
 function Login() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -10,6 +12,8 @@ function Login() {
 
     const navigate = useNavigate();
 
+    // submitting a post request and validate if the user exists and logging them in
+    // also sets cookies for the session of the user
     const onSubmit = async (event) =>{
         event.preventDefault();
         try{

@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
+
+// page for users to register themselves in the database
 function Register() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -9,7 +11,8 @@ function Register() {
 
     const navigate = useNavigate();
 
-
+    // a post request is sent to add the user details to the database
+    // user is then navigated to the home page to log in with their newly created credentials
     const onSubmit = async (event) =>{
         event.preventDefault();
             try{

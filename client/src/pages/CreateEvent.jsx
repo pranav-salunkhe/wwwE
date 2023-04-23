@@ -4,6 +4,7 @@ import { useGetUserId } from '../hooks/useGetUserID';
 import { useNavigate } from 'react-router-dom';
 
 function CreateEvent() {
+    // custom hook to get the userID
     const userID = useGetUserId();
     const navigate = useNavigate();
     const [event, setEvent] = useState({
@@ -18,12 +19,13 @@ function CreateEvent() {
         userOwner: `${userID}`
     });
 
-
+    // to handle the input for every field of the form
     const handleChange = (Event) => {
         const {name, value} = Event.target;
         setEvent({...event, [name]: value});
     }
 
+    // send a post request on creating event via axios
     const onSubmit = async (Event) =>{
         Event.preventDefault();
         try{
