@@ -80,4 +80,4 @@ Task - II of IRIS Web Team Rec
 # Screenshots
 
 # Tech Stack
-+ MERN + TailwindCSS
++ MERN + TailwindCSS + jQuery
