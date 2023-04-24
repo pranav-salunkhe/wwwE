@@ -18,9 +18,23 @@ function AdminDashboard() {
       navigate("/admin/createEvent");
     }
 
+
+    $('#calendar').click(function() {
+        $.ajax({
+          url: 'http://localhost:3131/user/calender/',
+          type: 'GET',
+          success: function(data) {
+            window.location.href = data.url;
+          },
+          error: function() {
+            alert('Failed to retrieve URL');
+          }
+        });
+      });
+
     // to allow only signed in users to view the calender
     const handleClick = () =>{
-        cookies.access_token ? (navigate("/user/calender")): alert("Unauthorized");
+        cookies.access_token ? (navigate("/admin/calender")): alert("Unauthorized");
     }
 
     //clear the cookies after logout
@@ -96,7 +110,7 @@ function AdminDashboard() {
         </p>
         <div className='flex justify-center items-center text-white text-xl gap-4'>
             <button onClick={createEvent} className='rounded-md bg-blue-500 hover:bg-transparent border-[1px] border-blue-500 hover:text-blue-500 p-2'>Create Event</button>
-            <button onClick={handleClick} className='rounded-md bg-blue-500 hover:bg-transparent border-[1px] border-blue-500 hover:text-blue-500 p-2'>Calender</button>
+            <button id='calendar' className='rounded-md bg-blue-500 hover:bg-transparent border-[1px] border-blue-500 hover:text-blue-500 p-2'>Calender</button>
             <button onClick={logout} className='rounded-md bg-blue-500 hover:bg-transparent border-[1px] border-blue-500 hover:text-blue-500 p-2'>Logout</button>
         </div>
     </div>

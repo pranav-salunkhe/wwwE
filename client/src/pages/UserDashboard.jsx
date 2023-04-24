@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import {Cookies, useCookies} from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import { useGetUserId } from '../hooks/useGetUserID';
 
@@ -15,9 +15,35 @@ function AdminDashboard() {
     const userID = useGetUserId();
 
     // to allow only signed in users to view the calender
-    const handleClick = () =>{
-        cookies.access_token ? (navigate("/user/calender")): alert("Unauthorized");
-    }
+    // const handleClick = () =>{
+    //     // cookies.access_token ? (navigate("/user/calender")): alert("Unauthorized");
+
+    // }
+    // const [url, setUrl] = useState("");
+    // const onCalendarClick = async (event) => {
+    //     event.preventDefault();
+    //     try{
+    //         const response = await axios.get('http://localhost:3131/user/calender/');
+    //         console.log(response.data);
+    //         setUrl(response.data.url);
+    //         window.location.href = url;
+    //     }catch(err){
+    //         console.log(err);
+    //     }
+    // }
+    $('#calendar').click(function() {
+        $.ajax({
+          url: 'http://localhost:3131/user/calender/',
+          type: 'GET',
+          success: function(data) {
+            window.location.href = data.url;
+          },
+          error: function() {
+            alert('Failed to retrieve URL');
+          }
+        });
+      });
+      
 
     //clear the cookies after logout
     const logout = () =>{
@@ -91,7 +117,7 @@ function AdminDashboard() {
             Clubs and Events Management System
         </p>
         <div className='flex justify-center items-center text-white text-xl gap-4'>
-            <button onClick={handleClick} className='rounded-md bg-blue-500 hover:bg-transparent border-[1px] border-blue-500 hover:text-blue-500 p-2'>Calender</button>
+            <button id='calendar' className='rounded-md bg-blue-500 hover:bg-transparent border-[1px] border-blue-500 hover:text-blue-500 p-2'>Calender</button>
             <button onClick={logout} className='rounded-md bg-blue-500 hover:bg-transparent border-[1px] border-blue-500 hover:text-blue-500 p-2'>Logout</button>
         </div>
     </div>
