@@ -69,6 +69,10 @@ Task - II of IRIS Web Team Rec
 - If the user is not a convenor, they can simply view the events and save them.
 - If a user is a convenor, along with above functionalities they are directed to '/admin' path which has the functionalities of creating events.
 ```
+3. Calendar:
+```
+- The user is first asked for authentication and permission to access calendar data.
+```
 # List of non implemented/planned features
 
 # List of known bugs
