@@ -58,6 +58,7 @@ Task - II of IRIS Web Team Rec
 
 # List of implemented features
 1. Authentication, Authorization:
++ Tech Used: MongoDB, Mongoose, jwt
 ```
 - The users can access the features of the app only if they are logged in.
 - I've used username, email, password based login functionality. The user needs to create a unique username and use their NITK edu mail.
@@ -65,21 +66,30 @@ Task - II of IRIS Web Team Rec
 - Any student of NITK can see all the events, they don't need to be part of a club.
 ```
 2. Authorization flow, Roles: 
++ Tech Used: MongoDB, Mongoose, jwt
 ```
 - If the user is not a convenor, they can simply view the events and save them.
 - If a user is a convenor, along with above functionalities they are directed to '/admin' path which has the functionalities of creating events.
 ```
 3. Calendar:
++ Tech Used: Calendar API, OAuth, React FullCalendar
 ```
 - The user is first asked for authentication and permission to access calendar data.
+- The user can add any event into their Google Calendar.
+- The web app also facilitates an in-app calendar.
 ```
 # List of non implemented/planned features
+```
+- Filters based on clubs, date, time, etc.
+```
 
 # List of known bugs
 1. The `createEvent` form doesn't submit the post request for creating event, although the API for the same works completely well on Postman/Insomnia.
 
 # References
-1. Builder.io YT Tutorials
+1. Documentations
+2. Builder.io YT
+
 
 # Screenshots
 
