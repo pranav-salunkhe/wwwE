@@ -29,7 +29,7 @@ function CreateEvent() {
     const onSubmit = async (Event) =>{
         Event.preventDefault();
         try{
-            await axios.post("http://localhost:3131/user/", event);
+            await axios.post("http://localhost:3131/user", event);
             alert("Event added");
             navigate("/admin");
         }catch (error){

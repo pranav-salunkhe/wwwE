@@ -33,7 +33,7 @@ function AdminDashboard() {
     // }
     $('#calendar').click(function() {
         $.ajax({
-          url: 'http://localhost:3131/user/calender/',
+          url: 'http://localhost:3131/user/get_url',
           type: 'GET',
           success: function(data) {
             window.location.href = data.url;

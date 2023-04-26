@@ -7,8 +7,11 @@ dotenv.config({});
 
 import {google} from 'googleapis';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc.js';
+import timezone from 'dayjs/plugin/timezone.js';
 
-
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 
 const router = express.Router();
@@ -61,19 +64,39 @@ router.get("/get_url/calender", async(req, res) => {
 
 
 
-router.get("/schedule_events", async (req, res) => {
+router.post("/schedule_events", async (req, res) => {
+    const timezone = 'Asia/Kolkata';
+    console.log(req.body);
+    function convertToRFC3339(dateTimeString) {
+        const dateTime = new Date(dateTimeString);
+        const year = dateTime.getUTCFullYear();
+        const month = pad(dateTime.getUTCMonth() + 1);
+        const day = pad(dateTime.getUTCDate());
+        const hour = pad(dateTime.getUTCHours());
+        const minute = pad(dateTime.getUTCMinutes());
+        const seconds = pad(dateTime.getUTCSeconds());
+        const milliseconds = pad(dateTime.getUTCMilliseconds(), 3);
+        return `${year}-${month}-${day}T${hour}:${minute}:${seconds}.${milliseconds}Z`;
+      }
+      
+      function pad(value, length = 2) {
+        return String(value).padStart(length, '0');
+      }
+      
     await calender.events.insert({  
         auth: oauth2Client,
         calendarId: 'primary',
         requestBody: {
-            summary: 'This is another test event',
-            description: 'Important test event',
+            summary: req.body.Summary,
+            description: req.body.Description,
             start: {
-                dateTime: dayjs(new Date()).add(1, 'day').toISOString(),
+                dateTime: convertToRFC3339(req.body.StartDate),
+                // dateTime: dayjs(new Date(req.body.StartDate)).add(req.body.StartTime, 'hour'),
                 timeZone: 'Asia/Kolkata',
             },
             end: {
-                dateTime: dayjs(new Date()).add(1, 'day').add(1, 'hour').toISOString(),
+                dateTime: convertToRFC3339(req.body.EndDate),
+                // dateTime: dayjs(new Date(req.body.EndDate)).add(req.body.EndTime, 'hour'),
                 timeZone: 'Asia/Kolkata',
             }
         },
