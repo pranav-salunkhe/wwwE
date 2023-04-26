@@ -55,6 +55,27 @@ function SavedEvents() {
     const goToAllEvents = () =>{
         navigate('/user');
     }
+    const [calenderEvent, setCalenderEvent] = useState({
+        Summary: "",
+        Description:"",
+        Location: "",
+    });
+
+    // const onAddToCalender = async (event) => {
+    //     calenderEvent.Summary = event.Title;
+    //     calenderEvent.Description = event.Description;
+    //     // calenderEvent.StartDate = `${(new Date(event.Date)).split('-').reverse().join('-')}T${event.Time}`;
+    //     // const inputDateString = event.Date;
+    //     // const [day, month, year] = inputDateString.split('-').map(Number);
+    //     // const outputDateString = new Date(year, month - 1, day).toLocaleDateString('en-GB', {year: 'numeric', month: '2-digit', day: '2-digit'});
+    //     // calenderEvent.StartDate= outputDateString;
+    //     calenderEvent.Location = event.Venue;
+    //     setCalenderEvent(calenderEvent);
+    //     console.log(calenderEvent);
+    //     const response = await axios.post("http://localhost:3131/user/schedule_events", calenderEvent);
+    //     console.log(response);
+    //     alert(response.body.msg);
+    // }
   return (
     <div className='bg-stone-900 w-full'>
     <div className='flex flex-row h-[10%] justify-evenly items-center'>
@@ -103,6 +124,7 @@ function SavedEvents() {
                             </div>
                             <div className='flex justify-center items-center m-5 gap-5'>
                             <button onClick={() => onBtnClick(idx)} className='text-white p-2 w-[50%] md:h-7 lg:h-10 rounded-lg font-semibold border-[1px] border-blue-500 bg-blue-500 hover:bg-transparent hover:text-blue-500 transition-all delay-150'>Details</button>  
+                            {/* <button onClick={() => onAddToCalender(event)} className='text-white p-2 w-[50%] md:h-7 lg:h-10 rounded-lg font-semibold border-[1px] border-blue-500 bg-blue-500 hover:bg-transparent hover:text-blue-500 transition-all delay-150'>Save To Calendar</button>   */}
                             </div>
                         </div>
                         </div>
