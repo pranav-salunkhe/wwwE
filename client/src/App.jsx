@@ -12,7 +12,7 @@ import AdminSavedEvents from "./pages/AdminSavedEvents";
 import UserSavedEvents from "./pages/UserSavedEvents";
 function App() {
   return (
-    <div className="h-[100%] w-full">
+    <div className="h-[100%]  w-full">
       <Router>
         <Routes>
           <Route path="/" element={<Home />}></Route>

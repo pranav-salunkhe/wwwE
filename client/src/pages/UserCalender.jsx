@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import axios, { all } from 'axios';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 import Fullcalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -9,11 +9,28 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import { Calendar } from '@fullcalendar/core';
 import googleCalendarPlugin from '@fullcalendar/google-calendar';
+import { useGetUserId } from '../hooks/useGetUserID';
+import dayjs from 'dayjs';
 // import dotenv from 'dotenv';
 // dotenv.config({});
 
 function UserCalender() {
-  
+  const [savedEvents, setSavedEvents] = useState([]);
+  const userID = useGetUserId();
+
+  useEffect(() => {
+    const fetchSavedEvents = async () => {
+        try{
+            const response = await axios.get(`http://localhost:3131/user/savedEvents/${userID}`);
+            setSavedEvents(response.data.savedEvents);
+        }catch(err){
+            console.log(err);
+        }
+    };
+
+    fetchSavedEvents();
+}, []);
+console.log(savedEvents);
   const [eventDetails, setEventDetails] = useState({
     Summary: "",
     Description:"",
@@ -38,6 +55,26 @@ function UserCalender() {
         console.log(err);
     }
   }
+  const [clubEvents, setClubEvents] = useState({
+    Summary: "",
+    Description:"",
+    StartDate: "",
+    EndDate: "",
+  });
+  const addClubEventToCalender = async (event, idx) => {
+    clubEvents.Summary = `${event.Title}`;
+    clubEvents.Description = event.Description;
+    clubEvents.StartDate = `${new Date(event.Date)}`;
+    clubEvents.EndDate = `${dayjs(new Date(event.Date)).add(1, 'hour')}`;
+    setClubEvents(clubEvents);
+    console.log(clubEvents);
+    try{
+      const response = await axios.post("http://localhost:3131/user/schedule_events", clubEvents);
+      alert(response.data.msg);
+    }catch (err){
+      console.log(err);
+    }
+  }
   return (
     <div className='bg-gradient-to-b from-white via-violet-100 to-white h-full flex flex-col'>
         <div className='flex justify-center p-5 items-center'>
@@ -45,6 +82,7 @@ function UserCalender() {
         </div>
         <div className='flex flex-col justify-center items-center m-5'>
             <div className='flex flex-col w-full h-full justify-center items-center gap-14'>
+              <div className='flex flex-row h-full w-full justify-evenly items-center'>
                 <form onSubmit={onCalendarClick} className='flex flex-col h-full gap-y-2'>
                   <div className='flex flex-col gap-y-1'>
                     <p className='text-blue-500 text-lg'>Summary:</p>
@@ -64,6 +102,15 @@ function UserCalender() {
                   </div>
                   <input type='submit' className='text-2xl p-2 rounded-md border-[1px] border-blue-500 hover:bg-transparent hover:border-blue-500 hover:text-blue-500 bg-blue-500 text-white flex justify-center items-center' value="Add Event"/>
                 </form>
+                <div className='flex flex-col overflow-auto h-full border-[1px] border-black'>
+                  <div className='flex justify-center m-2'><p>Add Club Event to Calendar</p></div>
+                  {savedEvents.map((event, idx) => (
+                    <div key={event._id} className='m-2 flex flex-col justify-center items-center'>
+                      <button key={idx} onClick={() => addClubEventToCalender(event, idx)} className='p-2 bg-blue-500 rounded-md'><p className='flex items-center text-center align-middle'> + {event.Title}</p></button>
+                    </div>
+                  ))}
+                </div>
+                </div>
                 <div className='flex h-full w-full justify-center'>
                 <Fullcalendar
                 
@@ -79,7 +126,6 @@ function UserCalender() {
                 bootstrapFontAwesome={true}
                 height='auto'
                 themeSystem='bootstrap5'
-                className="text-violet-100"
                 googleCalendarApiKey={import.meta.env.VITE_API_KEY}
                 events={{
                   googleCalendarId: `${import.meta.env.VITE_CAL_ID}`
