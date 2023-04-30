@@ -11,12 +11,14 @@ import { Calendar } from '@fullcalendar/core';
 import googleCalendarPlugin from '@fullcalendar/google-calendar';
 import { useGetUserId } from '../hooks/useGetUserID';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 // import dotenv from 'dotenv';
 // dotenv.config({});
 
 function UserCalender() {
   const [savedEvents, setSavedEvents] = useState([]);
   const userID = useGetUserId();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSavedEvents = async () => {
@@ -61,24 +63,35 @@ console.log(savedEvents);
     StartDate: "",
     EndDate: "",
   });
+  
   const addClubEventToCalender = async (event, idx) => {
     clubEvents.Summary = `${event.Title}`;
     clubEvents.Description = event.Description;
     clubEvents.StartDate = `${new Date(event.Date)}`;
     clubEvents.EndDate = `${dayjs(new Date(event.Date)).add(1, 'hour')}`;
     setClubEvents(clubEvents);
+    
     console.log(clubEvents);
     try{
       const response = await axios.post("http://localhost:3131/user/schedule_events", clubEvents);
       alert(response.data.msg);
+    
     }catch (err){
       console.log(err);
     }
   }
+  const onBackClick = () => {
+    navigate("/user");
+  }
   return (
     <div className='bg-gradient-to-b from-white via-violet-100 to-white h-full flex flex-col'>
         <div className='flex justify-center p-5 items-center'>
-         <p className='text-5xl text-blue-500 flex justify-center items-center'>Calendar</p>
+          <div className='w-full flex justify-end'>
+            <p className='text-5xl text-blue-500 flex justify-center items-center'>Calendar</p>
+          </div>
+         <div className='w-full flex justify-end'>
+          <button onClick={onBackClick} className="rounded-md bg-blue-500 hover:bg-transparent border-[1px] border-blue-500 hover:text-blue-500 p-2">Back</button>
+         </div>
         </div>
         <div className='flex flex-col justify-center items-center m-5'>
             <div className='flex flex-col w-full h-full justify-center items-center gap-14'>
@@ -106,7 +119,7 @@ console.log(savedEvents);
                   <div className='flex justify-center m-2'><p>Add Club Event to Calendar</p></div>
                   {savedEvents.map((event, idx) => (
                     <div key={event._id} className='m-2 flex flex-col justify-center items-center'>
-                      <button key={idx} onClick={() => addClubEventToCalender(event, idx)} className='p-2 bg-blue-500 rounded-md'><p className='flex items-center text-center align-middle'> + {event.Title}</p></button>
+                      <button key={idx} id={`btn${idx}`} onClick={() => addClubEventToCalender(event, idx)} className='p-2 bg-blue-500 rounded-md'><p className='flex items-center text-center align-middle'> + {event.Title}</p></button>
                     </div>
                   ))}
                 </div>

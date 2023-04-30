@@ -77,27 +77,39 @@ function SavedEvents() {
     //     console.log(response);
     //     alert(response.body.msg);
     // }
-    const onAddToCal = async (event) => {
-        const data = {
-            Summary: event.Title,
-            Description: event.Description,
-            StartDate: `${(new Date(event.Date))}`,
-            EndDate: `${dayjs(new Date(event.Date)).add(1, "hour")}`,
-        }
-        try {
-            const response = await axios.get(`http://localhost:3131/user/get_url`, data);
-            alert(response.data.msg);
+    // const onAddToCal = async (event) => {
+    //     const data = {
+    //         Summary: event.Title,
+    //         Description: event.Description,
+    //         StartDate: `${(new Date(event.Date))}`,
+    //         EndDate: `${dayjs(new Date(event.Date)).add(1, "hour")}`,
+    //     }
+    //     try {
+    //         const response = await axios.get(`http://localhost:3131/user/get_url`, data);
+    //         alert(response.data.msg);
         
-        // axios.get(url_resp.data.url).then(() => {
+    //     // axios.get(url_resp.data.url).then(() => {
             
-        // })
+    //     // })
         
         
-        } catch (err){
-            console.log(err);
-        }
+    //     } catch (err){
+    //         console.log(err);
+    //     }
 
-    }
+    // }
+    $('#calendar,#addToCal').click(function() {
+        $.ajax({
+          url: 'http://localhost:3131/user/get_url',
+          type: 'GET',
+          success: function(data) {
+            window.location.href = data.url;
+          },
+          error: function() {
+            alert('Failed to retrieve URL');
+          }
+        });
+      });
   return (
     <div className='bg-stone-900 w-full'>
     <div className='flex flex-row h-[10%] justify-evenly items-center'>
@@ -105,8 +117,8 @@ function SavedEvents() {
             Clubs and Events Management System
         </p>
         <div className='flex justify-center items-center text-white text-xl gap-4'>
-            <button onClick={handleClick} className='rounded-md bg-gray-400 p-2'>Calender</button>
-            <button onClick={logout} className='rounded-md bg-gray-400 p-2'>Logout</button>
+            <button id='calendar' className='rounded-md border-[1px] border-blue-500 bg-blue-500 hover:bg-transparent hover:text-blue-500 transition-all delay-150 p-2'>Calender</button>
+            <button onClick={logout} className='rounded-md border-[1px] border-blue-500 bg-blue-500 hover:bg-transparent hover:text-blue-500 transition-all delay-150 p-2'>Logout</button>
         </div>
     </div>
     <div className='flex flex-row h-[90%]'>
@@ -146,7 +158,7 @@ function SavedEvents() {
                             </div>
                             <div className='flex justify-between w-full items-center m-2 md:my-2 lg:my-4'>
                             <button onClick={() => onBtnClick(idx)} className='text-white flex basis-1/2 justify-center items-center m-2 p-2 md:h-10 lg:h-10 rounded-lg font-semibold border-[1px] border-blue-500 bg-blue-500 hover:bg-transparent hover:text-blue-500 transition-all delay-150'>Details</button>
-                            <button onClick={() => onAddToCal(event)} className='text-white flex basis-1/2 justify-center items-center m-2 p-2 md:h-10 lg:h-10 rounded-lg font-semibold border-[1px] border-blue-500 bg-blue-500 hover:bg-transparent hover:text-blue-500 transition-all delay-150'>Add to Calendar</button>
+                            <button id='addToCal' className='text-white flex basis-1/2 justify-center items-center m-2 p-2 md:h-10 lg:h-10 rounded-lg font-semibold border-[1px] border-blue-500 bg-blue-500 hover:bg-transparent hover:text-blue-500 transition-all delay-150'>Add to Calendar</button>
                             
                             </div>
                         </div>
