@@ -3,6 +3,8 @@ Task - II of IRIS Web Team Rec
 
 # Video Demonstration
 
+[<img src="/client/src/assets/CEMS_Logo.png" width="50%">](https://www.youtube.com/watch?v=88mw3UF_dNc "Features Demo")
+
 # How to set up the project
 + Make a folder for the project:<br>
   ```
