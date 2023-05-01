@@ -97,6 +97,10 @@ Task - II of IRIS Web Team Rec
 # 3. Calendar:
 + Tech Used: Calendar API, OAuth, React FullCalendar
 ```
+- The user can change the view of the calendar: 
+  View by Month
+  View by Week
+  View by Day
 - The user is first asked for authentication and permission to access calendar data.
 - The user can add any event into their Google Calendar.
 - The web app also facilitates an in-app calendar.
