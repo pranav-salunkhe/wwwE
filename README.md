@@ -101,14 +101,21 @@ Task - II of IRIS Web Team Rec
 - The web app also facilitates an in-app calendar.
 - The user can add any club's saved event in the Calendar
 ```
+# 4. Responsive:
++ Tech Used: TailwindCSS
+```
+- The web app is responsive i.e. it is compatible with majority of the screen sizes.
+```
 # List of non implemented/planned features
 ```
-- Filters based on clubs, date, time, etc.
 - Allowing only NITK Students to sign-up.
+- [PLANNED]Instead of Custom Registration and Login, I'm thinking of using Resgiter/Login via Google itself.
+- Clubs to which user belongs/Club Members isn't implemented.
 ```
 
 # List of known bugs
 1. The `createEvent` form doesn't submit the post request for creating event, although the API for the same works completely well on Postman/Insomnia.
+2. The event's button doesn't become 'disabled' once it is added to calendar. Although I've added the apt jQuery code for it.
 
 # References
 1. Documentations: <br></br>
