@@ -117,6 +117,7 @@ Task - II of IRIS Web Team Rec
 # List of known bugs
 1. The `createEvent` form doesn't submit the post request for creating event, although the API for the same works completely well on Postman/Insomnia.
 2. The event's button doesn't become 'disabled' once it is added to calendar. Although I've added the apt jQuery code for it.
+3. There's some conversion errors between RFC3339 to Local Time Zone Due to which I wasn't able to extract the time from the event. As a temporary fix, the user would be reminded of the event on the day it is supposed to occur.
 
 # References
 1. Documentations: <br></br>
