@@ -57,15 +57,16 @@ Task - II of IRIS Web Team Rec
   PSWD=yourpassword
   CLIENT_ID=yourclientid
   CLIENT_SECRET=yourclientsecret
-  REDIRECT_URL=yourredirecturl
+  REDIRECT_URL=yourredirecturl // for this project: http://localhost:<portnumber>/user/get_url/calender
   API_KEY=yourapikey
   ```
    > client: .env
    ```NOTE: Vite requires the prefix 'VITE_' to recognise env variables```
   ```
   VITE_API_KEY=yourapikey
-  VITE_CAL_ID=yourcalendarid
+  VITE_CAL_ID=yourcalendarid //you can get this from your Google Calendar: Settings for my Calendar -> Integrate Calendar
   ```
++ You need to make your calendar public in order to make the `<Fullcalendar />` element to work: `Settings for my Calendar -> Access permissions for events`
 # 3. Finally, run the project!
 + Run the server:<br>
   ```
