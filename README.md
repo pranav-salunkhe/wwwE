@@ -128,6 +128,12 @@ Task - II of IRIS Web Team Rec
 
 
 # Screenshots
+<img width="1437" alt="ss1" src="https://user-images.githubusercontent.com/73712941/235392412-a5b9fdf8-bd9d-4cf7-9cbc-89cfdf2af3cf.png">
+<img width="1424" alt="ss2" src="https://user-images.githubusercontent.com/73712941/235392467-9d1fd03e-24cc-4f70-a7e8-66d15cc09c08.png">
+<img width="1418" alt="Screenshot 2023-05-01 at 7 49 12 AM" src="https://user-images.githubusercontent.com/73712941/235392497-68b8e836-ed13-416b-ab82-9e2e4b2230bb.png">
+<img width="1412" alt="Screenshot 2023-05-01 at 7 49 34 AM" src="https://user-images.githubusercontent.com/73712941/235392515-62576a1c-114a-4300-ab1c-c6ba7cb08ff8.png">
+<img width="1413" alt="Screenshot 2023-05-01 at 7 49 50 AM" src="https://user-images.githubusercontent.com/73712941/235392531-f1e9f1cc-41d5-42b3-adc3-23cf89a01952.png">
+<img width="1416" alt="Screenshot 2023-05-01 at 7 50 00 AM" src="https://user-images.githubusercontent.com/73712941/235392535-db8cdacf-49b1-4cf3-acde-9554e8bfa39f.png">
 
 # Tech Stack
 + MERN + TailwindCSS + jQuery
