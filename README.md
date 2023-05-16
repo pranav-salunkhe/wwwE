@@ -1,5 +1,6 @@
-# Event Management System
-A Fullstack Event Management web application.
+# wwwE
+> wwwE : what?when?where?Event
+A Fullstack Event Management web application for students to manage all the events happening in NITK
 
 # Video Demonstration
 
